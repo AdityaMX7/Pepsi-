@@ -3,7 +3,7 @@ import { CAMPAIGNS } from '../constants';
 
 export default function CampaignBanner() {
   return (
-    <section className="py-24 bg-black overflow-hidden">
+    <section id="culture" className="py-24 bg-black overflow-hidden">
         <div className="container mx-auto px-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 {CAMPAIGNS.map((campaign, i) => (

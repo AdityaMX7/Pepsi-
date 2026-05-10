@@ -4,16 +4,17 @@ import { Plus } from 'lucide-react';
 
 interface ProductCardProps {
   product: Product;
-  key?: string;
+  onClick?: (product: Product) => void;
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product, onClick }: ProductCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="group relative"
+      className="group relative cursor-pointer"
+      onClick={() => onClick?.(product)}
     >
       <div className="relative aspect-[4/5] rounded-[2rem] overflow-hidden bg-[#111] p-8 flex flex-col items-center justify-center transition-all duration-700 group-hover:bg-[#1a1a1a]">
         {/* Background Accent */}
@@ -25,12 +26,20 @@ export default function ProductCard({ product }: ProductCardProps) {
         {/* Product Image */}
         <motion.div
           whileHover={{ scale: 1.1, rotate: -5 }}
-          className="relative z-10 w-full max-w-[200px] drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+          className="relative z-10 w-full aspect-square overflow-hidden flex items-center justify-center drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
         >
-          <img 
+          <motion.img 
+            layoutId={`img-${product.id}`}
             src={product.image} 
             alt={product.name}
-            className="w-full h-auto object-contain"
+            className="w-full h-full"
+            style={{ 
+              objectFit: product.gridPosition ? 'cover' : 'contain',
+              objectPosition: product.gridPosition === 'left' ? '0% center' : 
+                             product.gridPosition === 'center' ? '50% center' : 
+                             product.gridPosition === 'right' ? '100% center' : 'center',
+              transform: product.gridPosition ? 'scale(3)' : 'scale(1)'
+            }}
             referrerPolicy="no-referrer"
           />
         </motion.div>

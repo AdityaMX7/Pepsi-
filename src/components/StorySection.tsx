@@ -13,7 +13,7 @@ export default function StorySection() {
   const x2 = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
 
   return (
-    <section ref={containerRef} className="py-24 bg-pepsi-blue relative overflow-hidden">
+    <section id="stories" ref={containerRef} className="py-24 bg-pepsi-blue relative overflow-hidden">
       {/* Decorative Text Tracks */}
       <div className="absolute inset-0 pointer-events-none opacity-10">
         <motion.div style={{ x: x1 }} className="whitespace-nowrap font-display font-black text-[20vw] leading-none uppercase select-none">
@@ -59,17 +59,17 @@ export default function StorySection() {
                 <span className="text-stroke">A Drink.</span>
             </h2>
             <p className="text-lg text-white/50 leading-relaxed max-w-xl mb-12 font-medium">
-                For generations, Pepsi has stood at the crossroads of culture, music, and sports. We don’t just follow the beat—we set it. Join us as we push boundaries and embrace the pulse of modern life.
+                Established as "Brad's Drink" in 1893 by Caleb Bradham in New Bern, North Carolina, Pepsi has evolved into a global icon of refreshment. We don’t just follow the beat—we set it, standing at the crossroads of music, sports, and culture for over 130 years.
             </p>
             
             <div className="grid grid-cols-2 gap-8">
                 <div>
-                    <h5 className="font-display font-black text-xl mb-2 uppercase">Innovation</h5>
-                    <p className="text-white/60 text-sm">Pioneering new ways to refresh and energize your day.</p>
+                    <h5 className="font-display font-black text-xl mb-2 uppercase italic text-pepsi-cyan">Sustainability</h5>
+                    <p className="text-white/40 text-xs font-medium">With <span className="text-white">pep+ (PepsiCo Positive)</span>, we aim for net-zero emissions by 2040 and 100% rPET packaging by 2030.</p>
                 </div>
                 <div>
-                    <h5 className="font-display font-black text-xl mb-2 uppercase">Integrity</h5>
-                    <p className="text-white/60 text-sm">Commitment to a circular future for people and planet.</p>
+                    <h5 className="font-display font-black text-xl mb-2 uppercase italic text-pepsi-red">Innovation</h5>
+                    <p className="text-white/40 text-xs font-medium">From the first widget-tech Nitro Pepsi to cutting-edge flavor infusions, we redefine what a cola can be.</p>
                 </div>
             </div>
 

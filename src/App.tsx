@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { X, Sparkles } from 'lucide-react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import UnboxingAnimation from './components/UnboxingAnimation';
 import ProductGrid from './components/ProductGrid';
 import StorySection from './components/StorySection';
 import StoreLocator from './components/StoreLocator';
@@ -35,11 +36,13 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black font-sans selection:bg-pepsi-red selection:text-white">
+    <div className="min-h-screen bg-black font-sans selection:bg-pepsi-red selection:text-white relative overflow-hidden">
+      <div className="noise-overlay" />
       <Navbar />
       
-      <main>
+      <main className="relative z-10 pt-20 md:pt-0">
         <Hero />
+        <UnboxingAnimation />
         
         {/* Marquee Accent */}
         <div className="bg-pepsi-red py-4 relative z-10 overflow-hidden border-y border-white/10">
@@ -50,7 +53,7 @@ export default function App() {
             >
                 {[...Array(10)].map((_, i) => (
                     <span key={i} className="font-display font-black text-2xl uppercase tracking-[0.2em] italic">
-                        Experience the Pulse // Live Bold // Refresh Your Rhythm // Taste the Future //
+                        Experience the Pulse // Net Zero by 2040 // 100% rPET Packaging by 2030 // Refresh Your Rhythm // 130 Years of Bold Taste //
                     </span>
                 ))}
             </motion.div>

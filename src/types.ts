@@ -5,6 +5,9 @@ export interface Product {
   color: string;
   image: string;
   category: 'Classic' | 'Zero' | 'Limited';
+  history?: string;
+  usp?: string[];
+  gridPosition?: 'left' | 'center' | 'right';
 }
 
 export interface Moment {

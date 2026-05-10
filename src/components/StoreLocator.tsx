@@ -6,7 +6,7 @@ export default function StoreLocator() {
   const [zip, setZip] = useState('');
 
   return (
-    <section className="py-24 bg-black relative overflow-hidden">
+    <section id="locator" className="py-24 bg-black relative overflow-hidden">
       <div className="absolute top-0 right-0 w-1/3 h-full bg-pepsi-blue/5 rounded-l-full blur-[120px] pointer-events-none" />
       
       <div className="container mx-auto px-6">

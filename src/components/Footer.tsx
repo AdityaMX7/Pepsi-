@@ -33,12 +33,17 @@ export default function Footer() {
           </div>
 
           <div>
-            <h5 className="font-display font-black text-xs uppercase tracking-[0.4em] mb-10 text-white/20">Explore</h5>
+            <h5 className="font-display font-black text-xs uppercase tracking-[0.4em] mb-10 text-white/20">Products</h5>
             <ul className="flex flex-col gap-4">
-              {['All Flavors', 'Nitro Pepsi', 'Pepsi Zero Sugar', 'Limited Drops', 'Find Nearest'].map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-sm font-bold uppercase tracking-widest text-white/60 hover:text-white flex items-center justify-between group transition-colors">
-                    {link} <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+              {[
+                { name: 'Pepsi Original', link: '#products' },
+                { name: 'Pepsi Zero Sugar', link: '#products' },
+                { name: 'Nitro Pepsi', link: '#products' },
+                { name: 'Store Locator', link: '#locator' }
+              ].map((item) => (
+                <li key={item.name}>
+                  <a href={item.link} className="text-[10px] font-bold uppercase tracking-widest text-white/40 hover:text-white flex items-center justify-between group transition-colors">
+                    {item.name} <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
                   </a>
                 </li>
               ))}
@@ -46,12 +51,17 @@ export default function Footer() {
           </div>
 
           <div>
-            <h5 className="font-display font-black text-xs uppercase tracking-[0.4em] mb-10 text-white/20">Company</h5>
+            <h5 className="font-display font-black text-xs uppercase tracking-[0.4em] mb-10 text-white/20">Corporate</h5>
             <ul className="flex flex-col gap-4">
-              {['Culture', 'Sustainability', 'Investors', 'Career', 'Press Center'].map((link) => (
-                <li key={link}>
-                  <a href="#" className="text-sm font-bold uppercase tracking-widest text-white/60 hover:text-white flex items-center justify-between group transition-colors">
-                    {link} <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
+              {[
+                { name: 'Pepsi Culture', link: '#stories' },
+                { name: 'Moments Hub', link: '#moments' },
+                { name: 'Campaigns', link: '#culture' },
+                { name: 'pep+ Impact', link: '#stories' }
+              ].map((item) => (
+                <li key={item.name}>
+                  <a href={item.link} className="text-[10px] font-bold uppercase tracking-widest text-white/40 hover:text-white flex items-center justify-between group transition-colors">
+                    {item.name} <ArrowUpRight size={12} className="opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all" />
                   </a>
                 </li>
               ))}
