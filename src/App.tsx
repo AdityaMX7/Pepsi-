@@ -1,3 +1,4 @@
+import FloatingCard from "./FloatingCard";
 import { motion, AnimatePresence } from 'motion/react';
 import { useState, useEffect } from 'react';
 import { X, Sparkles } from 'lucide-react';
