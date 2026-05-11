@@ -28,22 +28,24 @@ export default function FloatingCard() {
   return (
     <>
       {/* FLOATING CARD */}
-      <motion.div
-        onClick={handleClick}
-        animate={{
-          x: [0, -40, 60, -20, 0],
-          y: [0, -60, -20, 40, 0],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-        }}
-        className="fixed bottom-10 right-10 w-[120px] h-[160px] rounded-xl cursor-pointer z-50"
-        style={{
-          background: "linear-gradient(145deg, gold, orange)",
-          boxShadow: "0 0 25px gold",
-        }}
-      >
+     <motion.div
+  onClick={handleClick}
+  animate={{
+    x: [0, -40, 60, -20, 0],
+    y: [0, -60, -20, 40, 0],
+  }}
+  whileHover={{ scale: 1.08 }}
+  transition={{
+    duration: 12,
+    repeat: Infinity,
+    ease: "easeInOut",
+  }}
+  className="fixed bottom-10 right-10 w-[120px] h-[160px] rounded-xl cursor-pointer z-50"
+  style={{
+    background: "linear-gradient(145deg, gold, orange)",
+    boxShadow: "0 0 25px gold",
+  }}
+>
         <img
           src="/images/pepsi-logo.png"
           className="w-[70%] mx-auto mt-5"
