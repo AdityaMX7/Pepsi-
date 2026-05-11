@@ -36,7 +36,7 @@ export default function FloatingCard() {
   }}
   whileHover={{ scale: 1.08 }}
   transition={{
-    duration: 60,
+    duration: 100,
     repeat: 1,
     ease: "easeInOut",
   }}
