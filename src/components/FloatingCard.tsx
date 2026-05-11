@@ -31,8 +31,8 @@ export default function FloatingCard() {
      <motion.div
   onClick={handleClick}
   animate={{
-    x: [0, -40, 60, -20, 0],
-    y: [0, -60, -20, 40, 0],
+    x: [100, -10, 30, -20, 0],
+    y: [100, -30, -10, 30, 0],
   }}
   whileHover={{ scale: 1.08 }}
   transition={{
