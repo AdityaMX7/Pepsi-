@@ -37,7 +37,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black font-sans selection:bg-pepsi-red selection:text-white relative overflow-hidden">
+    <div className="min-h-screen bg-black font-sans selection:bg-pepsi-red selection:text-white relative overflow-visible">
       <div className="noise-overlay" />
       <Navbar />
       
@@ -46,7 +46,7 @@ export default function App() {
         <UnboxingAnimation />
         
         {/* Marquee Accent */}
-        <div className="bg-pepsi-red py-4 relative z-10 overflow-hidden border-y border-white/10">
+        <div className="bg-pepsi-red py-4 relative z-10 overflow-visible border-y border-white/10">
             <motion.div 
                 animate={{ x: [0, -1000] }}
                 transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
