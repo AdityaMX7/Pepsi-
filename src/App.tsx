@@ -148,6 +148,7 @@ export default function App() {
           </div>
         )}
       </AnimatePresence>
+      <FloatingCard />
     </div>
   );
 }
