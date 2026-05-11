@@ -40,7 +40,7 @@ export default function FloatingCard() {
     repeat: 1,
     ease: "easeInOut",
   }}
-  className="fixed bottom-10 right-10 w-[120px] h-[160px] rounded-xl cursor-pointer z-50"
+  className="fixed top-20 right-32 w-[120px] h-[160px] rounded-xl cursor-pointer z-50"
   style={{
     background: "linear-gradient(145deg, gold, orange)",
     boxShadow: "0 0 25px gold",
