@@ -29,19 +29,28 @@ export default function ProductCard({ product, onClick }: ProductCardProps) {
           className="relative z-10 w-full aspect-square overflow-hidden flex items-center justify-center drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
         >
           <motion.img 
-            layoutId={`img-${product.id}`}
-            src={product.image} 
-            alt={product.name}
-            className="w-full h-full"
-            style={{ 
-              objectFit: product.gridPosition ? 'cover' : 'contain',
-              objectPosition: product.gridPosition === 'left' ? '0% center' : 
-                             product.gridPosition === 'center' ? '50% center' : 
-                             product.gridPosition === 'right' ? '100% center' : 'center',
-              transform: product.gridPosition ? 'scale(3)' : 'scale(1)'
-            }}
-            referrerPolicy="no-referrer"
-          />
+  layoutId={`img-${product.id}`}
+  src={product.image} 
+  alt={product.name}
+  className="w-full h-full"
+  style={{ 
+    objectFit: 'contain',   // 🔥 always show full image
+    objectPosition: 'center',
+  }}
+  animate={{ 
+    y: [0, -12, 0],         // 🍎 Apple-style floating
+  }}
+  transition={{ 
+    duration: 4,
+    repeat: Infinity,
+    ease: "easeInOut"
+  }}
+  whileHover={{ 
+    scale: 1.08,
+    rotate: -2
+  }}
+  referrerPolicy="no-referrer"
+/>
         </motion.div>
 
         {/* Content Overlay */}
