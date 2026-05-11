@@ -1,5 +1,5 @@
 import FloatingCard from "./FloatingCard";
-import { motion, AnimatePresence } from 'motion/react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { X, Sparkles } from 'lucide-react';
 import Navbar from './components/Navbar';
