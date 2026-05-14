@@ -30,6 +30,7 @@ export default function App() {
 
     document.addEventListener('mouseleave', handleMouseLeave);
     window.addEventListener('scroll', handleScroll);
+
     return () => {
       document.removeEventListener('mouseleave', handleMouseLeave);
       window.removeEventListener('scroll', handleScroll);
@@ -39,21 +40,21 @@ export default function App() {
   return (
     <div className="min-h-screen font-sans selection:bg-pepsi-red selection:text-white relative overflow-visible">
 
-      {/* 🔥 BACKGROUND LAYER */}
-      <div className="fixed inset-0 -z-10 overflow-hidden">
+      {/* 🌌 BACKGROUND */}
+      <div className="fixed inset-0 z-0 overflow-hidden">
 
-        {/* Base black → disco gradient */}
+        {/* Base + Disco Gradient */}
         <motion.div
           animate={{
             background: hasScrolled
-              ? "radial-gradient(circle at center, #ff00cc, #3333ff, #000000)"
+              ? "radial-gradient(circle at 20% 30%, #ff00cc, transparent), radial-gradient(circle at 80% 70%, #00ffff, transparent), #000"
               : "#000000",
           }}
           transition={{ duration: 1 }}
           className="absolute inset-0"
         />
 
-        {/* 🎉 DISCO LIGHT BLOBS */}
+        {/* 🎉 Moving Lights */}
         {hasScrolled && (
           <>
             <motion.div
@@ -75,16 +76,17 @@ export default function App() {
         )}
       </div>
 
+      {/* CONTENT */}
       <div className="noise-overlay" />
       <Navbar />
-      
+
       <main className="relative z-10 pt-20 md:pt-0">
         <Hero />
         <UnboxingAnimation />
-        
-        {/* Marquee */}
+
+        {/* 🔴 Marquee */}
         <div className="bg-pepsi-red py-4 relative z-10 overflow-visible border-y border-white/10">
-          <motion.div 
+          <motion.div
             animate={{ x: [0, -1000] }}
             transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
             className="flex whitespace-nowrap gap-20"
@@ -106,7 +108,7 @@ export default function App() {
 
       <Footer />
 
-      {/* Floating Button */}
+      {/* ✨ Floating Button */}
       <AnimatePresence>
         {hasScrolled && (
           <motion.button
@@ -115,14 +117,14 @@ export default function App() {
             exit={{ opacity: 0, scale: 0.5, y: 50 }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="fixed bottom-10 right-10 z-[60] w-16 h-16 rounded-full bg-pepsi-red text-white shadow-[0_10px_40px_rgba(227,41,57,0.5)] flex items-center justify-center group"
+            className="fixed bottom-10 right-10 z-[60] w-16 h-16 rounded-full bg-pepsi-red text-white shadow-[0_10px_40px_rgba(227,41,57,0.5)] flex items-center justify-center"
           >
             <Sparkles size={24} />
           </motion.button>
         )}
       </AnimatePresence>
 
-      {/* Popup */}
+      {/* 🚪 Exit Popup */}
       <AnimatePresence>
         {showExitPopup && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-6">
@@ -133,8 +135,17 @@ export default function App() {
               onClick={() => setShowExitPopup(false)}
               className="absolute inset-0 bg-black/80 backdrop-blur-md"
             />
-            <motion.div className="relative w-full max-w-lg glass p-12 rounded-[3rem] text-center">
-              <button onClick={() => setShowExitPopup(false)} className="absolute top-6 right-6">
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 30 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 30 }}
+              className="relative w-full max-w-lg glass p-12 rounded-[3rem] text-center"
+            >
+              <button
+                onClick={() => setShowExitPopup(false)}
+                className="absolute top-6 right-6"
+              >
                 <X size={20} />
               </button>
 
@@ -153,6 +164,7 @@ export default function App() {
         )}
       </AnimatePresence>
 
+      {/* 🟡 Floating Card */}
       <FloatingCard />
     </div>
   );
