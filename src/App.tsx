@@ -25,7 +25,7 @@ export default function App() {
     };
 
     const handleScroll = () => {
-        setHasScrolled(window.scrollY > 300);
+      setHasScrolled(window.scrollY > 300);
     };
 
     document.addEventListener('mouseleave', handleMouseLeave);
@@ -37,7 +37,44 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black font-sans selection:bg-pepsi-red selection:text-white relative overflow-visible">
+    <div className="min-h-screen font-sans selection:bg-pepsi-red selection:text-white relative overflow-visible">
+
+      {/* 🔥 BACKGROUND LAYER */}
+      <div className="fixed inset-0 -z-10 overflow-hidden">
+
+        {/* Base black → disco gradient */}
+        <motion.div
+          animate={{
+            background: hasScrolled
+              ? "radial-gradient(circle at center, #ff00cc, #3333ff, #000000)"
+              : "#000000",
+          }}
+          transition={{ duration: 1 }}
+          className="absolute inset-0"
+        />
+
+        {/* 🎉 DISCO LIGHT BLOBS */}
+        {hasScrolled && (
+          <>
+            <motion.div
+              animate={{ x: [0, 200, -150, 0], y: [0, -100, 100, 0] }}
+              transition={{ duration: 10, repeat: Infinity }}
+              className="absolute w-72 h-72 bg-pink-500/30 rounded-full blur-3xl top-20 left-10"
+            />
+            <motion.div
+              animate={{ x: [0, -200, 150, 0], y: [0, 150, -100, 0] }}
+              transition={{ duration: 12, repeat: Infinity }}
+              className="absolute w-72 h-72 bg-blue-500/30 rounded-full blur-3xl bottom-20 right-10"
+            />
+            <motion.div
+              animate={{ x: [0, 100, -100, 0], y: [0, -150, 150, 0] }}
+              transition={{ duration: 14, repeat: Infinity }}
+              className="absolute w-72 h-72 bg-yellow-400/30 rounded-full blur-3xl top-1/2 left-1/2"
+            />
+          </>
+        )}
+      </div>
+
       <div className="noise-overlay" />
       <Navbar />
       
@@ -45,19 +82,19 @@ export default function App() {
         <Hero />
         <UnboxingAnimation />
         
-        {/* Marquee Accent */}
+        {/* Marquee */}
         <div className="bg-pepsi-red py-4 relative z-10 overflow-visible border-y border-white/10">
-            <motion.div 
-                animate={{ x: [0, -1000] }}
-                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                className="flex whitespace-nowrap gap-20"
-            >
-                {[...Array(10)].map((_, i) => (
-                    <span key={i} className="font-display font-black text-2xl uppercase tracking-[0.2em] italic">
-                        Experience the Pulse // Net Zero by 2040 // 100% rPET Packaging by 2030 // Refresh Your Rhythm // 130 Years of Bold Taste //
-                    </span>
-                ))}
-            </motion.div>
+          <motion.div 
+            animate={{ x: [0, -1000] }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            className="flex whitespace-nowrap gap-20"
+          >
+            {[...Array(10)].map((_, i) => (
+              <span key={i} className="font-display font-black text-2xl uppercase tracking-[0.2em] italic">
+                Experience the Pulse // Net Zero by 2040 // 100% rPET Packaging by 2030 // Refresh Your Rhythm // 130 Years of Bold Taste //
+              </span>
+            ))}
+          </motion.div>
         </div>
 
         <ProductGrid />
@@ -69,7 +106,7 @@ export default function App() {
 
       <Footer />
 
-      {/* Floating Action Button */}
+      {/* Floating Button */}
       <AnimatePresence>
         {hasScrolled && (
           <motion.button
@@ -80,15 +117,12 @@ export default function App() {
             whileTap={{ scale: 0.9 }}
             className="fixed bottom-10 right-10 z-[60] w-16 h-16 rounded-full bg-pepsi-red text-white shadow-[0_10px_40px_rgba(227,41,57,0.5)] flex items-center justify-center group"
           >
-            <Sparkles size={24} className="group-hover:rotate-12 transition-transform" />
-            <div className="absolute right-20 bg-black glass px-4 py-2 rounded-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                <span className="text-[10px] font-black uppercase tracking-widest">Join the Wave</span>
-            </div>
+            <Sparkles size={24} />
           </motion.button>
         )}
       </AnimatePresence>
 
-      {/* Exit Intent Popup */}
+      {/* Popup */}
       <AnimatePresence>
         {showExitPopup && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-6">
@@ -99,55 +133,26 @@ export default function App() {
               onClick={() => setShowExitPopup(false)}
               className="absolute inset-0 bg-black/80 backdrop-blur-md"
             />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 30 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 30 }}
-              className="relative w-full max-w-lg glass p-12 rounded-[3rem] border-white/10 shadow-4xl text-center"
-            >
-              <button 
-                onClick={() => setShowExitPopup(false)}
-                className="absolute top-6 right-6 p-2 hover:bg-white/10 rounded-full transition-colors"
-                id="close-popup"
-              >
+            <motion.div className="relative w-full max-w-lg glass p-12 rounded-[3rem] text-center">
+              <button onClick={() => setShowExitPopup(false)} className="absolute top-6 right-6">
                 <X size={20} />
               </button>
 
-              <div className="w-20 h-20 bg-gradient-to-br from-pepsi-blue via-pepsi-cyan to-pepsi-red rounded-full mx-auto mb-8 flex items-center justify-center p-1">
-                <div className="w-full h-full bg-black rounded-full flex items-center justify-center">
-                    <Sparkles size={32} className="text-pepsi-cyan" />
-                </div>
-              </div>
-
-              <h2 className="font-display font-black text-4xl uppercase tracking-tighter mb-4">
-                Don't Miss <br />
-                <span className="text-gradient">The Rhythm.</span>
+              <h2 className="text-3xl font-bold mb-4">
+                Don't Miss The Rhythm
               </h2>
-              <p className="text-white/60 mb-10">
-                Sign up for exclusive drops, early event access, and limited edition flavor news before anybody else.
-              </p>
 
-              <div className="space-y-4">
-                <input 
-                  type="email" 
-                  placeholder="ENTER EMAIL ADDRESS" 
-                  className="w-full bg-white/5 border border-white/10 rounded-2xl py-5 px-6 text-xs font-black tracking-widest outline-none focus:border-pepsi-cyan transition-all"
-                />
-                <button className="w-full py-5 bg-pepsi-blue text-white rounded-2xl font-black uppercase tracking-[0.2em] text-xs hover:bg-pepsi-cyan hover:text-black transition-colors">
-                  Claim Your Access
-                </button>
-              </div>
-
-              <button 
+              <button
                 onClick={() => setShowExitPopup(false)}
-                className="mt-6 text-[10px] font-black uppercase tracking-widest text-white/30 hover:text-white transition-colors underline underline-offset-4"
+                className="mt-6 text-sm underline"
               >
-                Maybe Next Time
+                Close
               </button>
             </motion.div>
           </div>
         )}
       </AnimatePresence>
+
       <FloatingCard />
     </div>
   );
