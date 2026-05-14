@@ -25,7 +25,7 @@ export default function App() {
     };
 
     const handleScroll = () => {
-      setHasScrolled(window.scrollY > 300);
+      setHasScrolled(window.scrollY > 50); // 🔥 earlier trigger
     };
 
     document.addEventListener('mouseleave', handleMouseLeave);
@@ -40,53 +40,63 @@ export default function App() {
   return (
     <div className="min-h-screen font-sans selection:bg-pepsi-red selection:text-white relative overflow-visible">
 
-      {/* 🌌 BACKGROUND */}
-      <div className="fixed inset-0 z-0 overflow-hidden">
+      {/* 🔥 DISCO BACKGROUND */}
+      <div className="fixed inset-0 -z-10 overflow-hidden">
 
-        {/* Base + Disco Gradient */}
+        {/* 🌈 Animated Gradient */}
         <motion.div
           animate={{
             background: hasScrolled
-              ? "radial-gradient(circle at 20% 30%, #ff00cc, transparent), radial-gradient(circle at 80% 70%, #00ffff, transparent), #000"
+              ? [
+                  "radial-gradient(circle at 20% 20%, #ff0000, #000)",
+                  "radial-gradient(circle at 80% 30%, #00ffcc, #000)",
+                  "radial-gradient(circle at 50% 80%, #ffcc00, #000)",
+                  "radial-gradient(circle at 30% 60%, #ff00ff, #000)",
+                ]
               : "#000000",
           }}
-          transition={{ duration: 1 }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "linear",
+          }}
           className="absolute inset-0"
         />
 
-        {/* 🎉 Moving Lights */}
+        {/* 💡 Moving Light Blobs */}
         {hasScrolled && (
           <>
             <motion.div
-              animate={{ x: [0, 200, -150, 0], y: [0, -100, 100, 0] }}
+              animate={{ x: [0, 300, -200, 0], y: [0, -200, 200, 0] }}
+              transition={{ duration: 8, repeat: Infinity }}
+              className="absolute w-[400px] h-[400px] bg-pink-500/50 rounded-full blur-[120px] top-10 left-10"
+            />
+            <motion.div
+              animate={{ x: [0, -300, 200, 0], y: [0, 200, -200, 0] }}
               transition={{ duration: 10, repeat: Infinity }}
-              className="absolute w-72 h-72 bg-pink-500/30 rounded-full blur-3xl top-20 left-10"
+              className="absolute w-[400px] h-[400px] bg-blue-500/50 rounded-full blur-[120px] bottom-10 right-10"
             />
             <motion.div
-              animate={{ x: [0, -200, 150, 0], y: [0, 150, -100, 0] }}
+              animate={{ x: [0, 200, -200, 0], y: [0, -250, 250, 0] }}
               transition={{ duration: 12, repeat: Infinity }}
-              className="absolute w-72 h-72 bg-blue-500/30 rounded-full blur-3xl bottom-20 right-10"
-            />
-            <motion.div
-              animate={{ x: [0, 100, -100, 0], y: [0, -150, 150, 0] }}
-              transition={{ duration: 14, repeat: Infinity }}
-              className="absolute w-72 h-72 bg-yellow-400/30 rounded-full blur-3xl top-1/2 left-1/2"
+              className="absolute w-[400px] h-[400px] bg-yellow-400/50 rounded-full blur-[120px] top-1/2 left-1/2"
             />
           </>
         )}
       </div>
 
-      {/* CONTENT */}
-      <div className="noise-overlay" />
-      <Navbar />
+      {/* ⚠️ Noise overlay reduced so it doesn't hide disco */}
+      <div className="noise-overlay opacity-30 pointer-events-none" />
 
+      <Navbar />
+      
       <main className="relative z-10 pt-20 md:pt-0">
         <Hero />
         <UnboxingAnimation />
-
-        {/* 🔴 Marquee */}
+        
+        {/* Marquee */}
         <div className="bg-pepsi-red py-4 relative z-10 overflow-visible border-y border-white/10">
-          <motion.div
+          <motion.div 
             animate={{ x: [0, -1000] }}
             transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
             className="flex whitespace-nowrap gap-20"
@@ -108,7 +118,7 @@ export default function App() {
 
       <Footer />
 
-      {/* ✨ Floating Button */}
+      {/* Floating Button */}
       <AnimatePresence>
         {hasScrolled && (
           <motion.button
@@ -117,14 +127,14 @@ export default function App() {
             exit={{ opacity: 0, scale: 0.5, y: 50 }}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            className="fixed bottom-10 right-10 z-[60] w-16 h-16 rounded-full bg-pepsi-red text-white shadow-[0_10px_40px_rgba(227,41,57,0.5)] flex items-center justify-center"
+            className="fixed bottom-10 right-10 z-[60] w-16 h-16 rounded-full bg-pepsi-red text-white shadow-[0_10px_40px_rgba(227,41,57,0.5)] flex items-center justify-center group"
           >
             <Sparkles size={24} />
           </motion.button>
         )}
       </AnimatePresence>
 
-      {/* 🚪 Exit Popup */}
+      {/* Popup */}
       <AnimatePresence>
         {showExitPopup && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-6">
@@ -135,17 +145,8 @@ export default function App() {
               onClick={() => setShowExitPopup(false)}
               className="absolute inset-0 bg-black/80 backdrop-blur-md"
             />
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 30 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 30 }}
-              className="relative w-full max-w-lg glass p-12 rounded-[3rem] text-center"
-            >
-              <button
-                onClick={() => setShowExitPopup(false)}
-                className="absolute top-6 right-6"
-              >
+            <motion.div className="relative w-full max-w-lg glass p-12 rounded-[3rem] text-center">
+              <button onClick={() => setShowExitPopup(false)} className="absolute top-6 right-6">
                 <X size={20} />
               </button>
 
@@ -164,7 +165,6 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* 🟡 Floating Card */}
       <FloatingCard />
     </div>
   );
